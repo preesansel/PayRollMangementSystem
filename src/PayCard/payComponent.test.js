@@ -8,10 +8,6 @@ import MockAdapter from 'axios-mock-adapter';
 import { getPreviousMonth, formatCurrency, getFormattedMonthYear } from './payComponent';
 
 
-
-
-
-
 const mockAxios = new MockAdapter(axios);
 
 const mockEmployeeDetails = {
@@ -59,7 +55,6 @@ const renderComponent = async () => {
     </Router>
     )
 }
-
 
 describe('PayComponent', () => {
       
@@ -109,7 +104,7 @@ describe('formatCurrency', () => {
         expect(formatCurrency(1234567.89)).toBe('12,34,567.89');
     });
 });
-describe('getFormattedMonthYear', () => {
+  describe('getFormattedMonthYear', () => {
     it('should return the formatted month and year', () => {
         const month = 6;
         const year = 2024;

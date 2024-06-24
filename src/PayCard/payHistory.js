@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import PayComponent from './payComponent';
 import { useLocation } from 'react-router-dom';
 import { Card, Form, Row, Col } from 'react-bootstrap';
