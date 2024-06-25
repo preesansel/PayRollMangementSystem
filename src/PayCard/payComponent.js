@@ -136,6 +136,7 @@ const PayComponent = ({ empId, month, year, employeeDetails: initialEmployeeDeta
                     ₹ {masked ? '*******' : salaryDetails.grossEarning}
                 </span>
                 <FontAwesomeIcon
+                    data-testid="mask-toggle"
                     icon={masked ? faEye : faEyeSlash}
                     className="ms-2"
                     onClick={toggleVisibility}

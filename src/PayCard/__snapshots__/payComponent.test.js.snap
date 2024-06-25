@@ -11,7 +11,9 @@ exports[`PayComponent renders PayComponent correctly with initial state 1`] = `
     >
       <div
         class="card-title h5"
-      />
+      >
+        Pay
+      </div>
       <div
         class="d-flex justify-content-between align-items-center"
       >
@@ -34,6 +36,7 @@ exports[`PayComponent renders PayComponent correctly with initial state 1`] = `
             class="svg-inline--fa fa-eye ms-2"
             data-icon="eye"
             data-prefix="fas"
+            data-testid="mask-toggle"
             focusable="false"
             role="img"
             style="cursor: pointer;"
@@ -101,6 +104,12 @@ exports[`PayComponent renders PayComponent correctly with initial state 1`] = `
           type="button"
         >
           View Payslip
+        </button>
+        <button
+          class="btn btn-outline-primary"
+          type="button"
+        >
+          Pay History
         </button>
       </div>
     </div>
