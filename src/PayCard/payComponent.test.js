@@ -127,6 +127,8 @@ describe('PayComponent', () => {
         act(() => {fireEvent.click(viewPayslipButton)})
         
         expect(mockedUsedNavigate).toHaveBeenCalledWith('/payslip', { state: { employeeDetails: mockEmployeeDetails, salaryDetails: mockSalaryDetails, month: 4, year: 2024 } })
+        jest.restoreAllMocks();
+        jest.clearAllMocks();
     })
 
     it('should allow navigating to the pay history', async () => {
@@ -140,7 +142,6 @@ describe('PayComponent', () => {
         const viewPayHistoryButton = getByRole('button', {name: 'Pay History'})
 
         act(() => {fireEvent.click(viewPayHistoryButton)})
-        
         expect(mockedUsedNavigate).toHaveBeenCalledWith('/payhistory', { state: { employeeDetails: mockEmployeeDetails } })
     })
 });
@@ -151,6 +152,7 @@ describe('PayComponent', () => {
             jest.spyOn(global, 'Date').mockImplementation(() => date);
             expect(getPreviousMonth()).toEqual({ month: 5, year: 2024 });
             jest.restoreAllMocks();
+            jest.clearAllMocks();
         });
 
         it('should handle year transition correctly', () => {
@@ -158,6 +160,7 @@ describe('PayComponent', () => {
             jest.spyOn(global, 'Date').mockImplementation(() => date);
             expect(getPreviousMonth()).toEqual({ month: 12, year: 2023 });
             jest.restoreAllMocks();
+            jest.clearAllMocks();
         });
     });
 });

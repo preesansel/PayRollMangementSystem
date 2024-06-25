@@ -42,6 +42,11 @@ describe('PayHistory Component', () => {
         jest.clearAllMocks();
     });
 
+    afterAll(() => {
+        jest.clearAllMocks()
+        jest.restoreAllMocks()
+    })
+
     test('renders initial message when no month is selected', () => {
         render(
             <Router>
@@ -60,7 +65,7 @@ describe('PayHistory Component', () => {
             </Router>
         );
 
-        const financialYearDropdown = screen.getByText('Financial Year');
+        const financialYearDropdown = screen.getByLabelText('Financial Year');
         fireEvent.click(financialYearDropdown);
         expect(screen.getByText('2022-2023')).toBeInTheDocument();
         expect(screen.getByText('2023-2024')).toBeInTheDocument();
@@ -73,13 +78,11 @@ describe('PayHistory Component', () => {
             </Router>
         );
 
-        const financialYearDropdown = screen.getByText('Financial Year');
-        fireEvent.click(financialYearDropdown);
-        fireEvent.click(screen.getByText('2022-2023'));
-        // fireEvent.change(financialYearDropdown, { target: { value: '2022-2023' } });
+        const financialYearDropdown = screen.getByLabelText('Financial Year');
+        fireEvent.change(financialYearDropdown, { target: { value: '2022-2023' } });
 
         await waitFor(() => {
-            const monthDropdown = screen.getByText('Month');
+            const monthDropdown = screen.getByLabelText('Month');
             fireEvent.click(monthDropdown);
             expect(screen.getByText('May')).toBeInTheDocument();
             expect(screen.getByText('June')).toBeInTheDocument();
@@ -93,14 +96,11 @@ describe('PayHistory Component', () => {
             </Router>
         );
 
-        const financialYearDropdown = screen.getByText('Financial Year');
-        fireEvent.click(financialYearDropdown);
-        fireEvent.click(screen.getByText('2022-2023'));
+        const financialYearDropdown = screen.getByLabelText('Financial Year');
+        fireEvent.change(financialYearDropdown, { target: { value: '2023-2024' } });
 
-        const monthDropdown = screen.getByText('Month');
-        fireEvent.click(monthDropdown);
-        fireEvent.click(screen.getByText('May'));
-        // fireEvent.change(monthDropdown, { target: { value: '5' } });
+        const monthDropdown = screen.getByLabelText('Month');
+        fireEvent.change(monthDropdown, { target: { value: '5' } });
 
         await waitFor(() => {
             // Check if PayComponent is rendered
@@ -120,10 +120,8 @@ describe('PayHistory Component', () => {
             </Router>
         );
 
-        const financialYearDropdown = screen.getByText('Financial Year');
-        fireEvent.click(financialYearDropdown);
-        fireEvent.click(screen.getByText('2023-2024'));
-        // fireEvent.change(financialYearDropdown, { target: { value: '2023-2024' } });
+        const financialYearDropdown = screen.getByLabelText('Financial Year');
+        fireEvent.change(financialYearDropdown, { target: { value: '2022-2023' } });
 
         await waitFor(() => {
             const monthDropdown = screen.getByText('Month');
@@ -140,12 +138,11 @@ describe('PayHistory Component', () => {
             </Router>
         );
 
-        const monthDropdown = screen.getByText('Month');
-        fireEvent.click(monthDropdown);
-        fireEvent.click(screen.getByText('May'));
+        const monthDropdown = screen.getByLabelText('Month');
+        fireEvent.change(monthDropdown, { target: { value: '5' } });
 
         // Ensure the month has been selected and handleMonthChange was called
-        const selectedMonthOption = screen.getByText('May');
+        expect(screen.getByText('May')).toBeInTheDocument()
         
     });
     test('handleFinancialYearChange sets selected financial year and resets selected month', () => {
@@ -155,13 +152,11 @@ describe('PayHistory Component', () => {
             </Router>
         );
 
-        const financialYearDropdown = screen.getByText('Financial Year');
-        fireEvent.click(financialYearDropdown);
-        fireEvent.click(screen.getByText('2023-2024'));
-        // fireEvent.change(financialYearDropdown, { target: { value: '2023-2024' } });
+        const financialYearDropdown = screen.getByLabelText('Financial Year');
+        fireEvent.change(financialYearDropdown, { target: { value: '2023-2024' } });
 
-        // expect(screen.getByText('Financial Year')).toHaveValue('2023-2024');
-        // expect(screen.getByText('Month')).toHaveValue('');
+        expect(screen.getByLabelText('Financial Year')).toHaveValue('2023-2024');
+        expect(screen.getByLabelText('Month')).toHaveValue('');
     });
 
     test('changes the selected month correctly', async () => {
@@ -171,23 +166,17 @@ describe('PayHistory Component', () => {
             </Router>
         );
 
-        const financialYearDropdown = screen.getByText('Financial Year');
-        fireEvent.click(financialYearDropdown);
-        fireEvent.click(screen.getByText('2022-2023'));
-        // fireEvent.change(financialYearDropdown, { target: { value: '2022-2023' } });
+        const financialYearDropdown = screen.getByLabelText('Financial Year');
+        fireEvent.change(financialYearDropdown, { target: { value: '2022-2023' } });
 
-        const monthDropdown = screen.getByText('Month');
-        fireEvent.click(monthDropdown);
-        fireEvent.click(screen.getByText('May'));
-        // fireEvent.change(monthDropdown, { target: { value: '5' } });
+        const monthDropdown = screen.getByLabelText('Month');
+        fireEvent.change(monthDropdown, { target: { value: '5' } });
 
         await waitFor(() => {
             expect(screen.getByText('Pay Info')).toBeInTheDocument();
         });
-         
-        fireEvent.click(monthDropdown);
-        fireEvent.click(screen.getByText('June'));
-        // fireEvent.change(monthDropdown, { target: { value: '6' } });
+
+        fireEvent.change(monthDropdown, { target: { value: '6' } });
 
         await waitFor(() => {
             expect(screen.getByText('Pay Info')).toBeInTheDocument();

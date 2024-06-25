@@ -60,9 +60,10 @@ const PayHistory = () => {
                     <Card className="shadow">
                         <Card.Body>
                             <Form.Group className="mb-3">
-                                <Form.Label>Financial Year</Form.Label>
+                                <Form.Label htmlFor="financialYearSelect">Financial Year</Form.Label>
                                 <Form.Control
                                     as="select"
+                                    id="financialYearSelect"
                                     value={selectedFinancialYear}
                                     onChange={handleFinancialYearChange}
                                     className="form-select"
@@ -74,9 +75,10 @@ const PayHistory = () => {
                                 </Form.Control>
                             </Form.Group>
                             <Form.Group className="mb-3">
-                                <Form.Label>Month</Form.Label>
+                                <Form.Label htmlFor="monthSelect">Month</Form.Label>
                                 <Form.Control
                                     as="select"
+                                    id="monthSelect"
                                     value={selectedMonth}
                                     onChange={handleMonthChange}
                                     className="form-select"
